@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crud.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,21 +9,21 @@ namespace Crud.Repositorio
 {
     public class TimeRepository
     {
-        public SimuladorBD bd { get; set; }
+        public SimuladorBD bd { get; set; }//Propriedade para o bancco
 
         public TimeRepository(SimuladorBD bdPreenchido)
         {
             bd = bdPreenchido;
         }
 
-        public void Adicionar()
-        {
-
+        public void Adicionar(Time time)
+        { 
+            bd.Times.Add(time);
         }
 
-        public void Remover()
+        public void Remover(Time time)
         {
-
+            bd.Times.Remove(time);
         }
 
         public void Editar()
@@ -30,9 +31,9 @@ namespace Crud.Repositorio
 
         }
 
-        public void Listar()
+        public List<Time> Listar()
         {
-
+            return bd.Times.ToList();
         }
 
 
