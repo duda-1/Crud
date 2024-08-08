@@ -36,5 +36,10 @@ namespace Crud.Aplicação
             List<Time> t = repository.Listar().OrderBy(x => x.Nome).ToList();
             return t;
         }
+
+        public Time BuscarPorId(int id)
+        {
+           return repository.BuscarPorId(id);
+        }
     }
 }

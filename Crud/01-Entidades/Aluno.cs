@@ -12,6 +12,6 @@ namespace Crud.Entidades
         public string Nome { get; set; }
         public int Idade { get; set; }
         public int Peso { get; set; }
-    }
+    
     }
 }

@@ -20,7 +20,7 @@ namespace Crud.Repositorio
         public void Adicionar(Aluno alunos)
         {
             //Nesse metodo passamos um parametro com o tipo Aluno
-            //Bd =>chamar o banco de dados
+            //Bd => chamar o banco de dados
             //Alunos => Nome da lista que colocamos dessa pagina
             //Add => Comando que iremos realizar 
             bd.Alunos.Add(alunos);
@@ -29,7 +29,7 @@ namespace Crud.Repositorio
         public void Remover(Aluno alunos)
         {
             //Nesse metodo passamos um parametro com o tipo Aluno
-            //Bd =>chamar o banco de dados
+            //Bd => chamar o banco de dados
             //Alunos => Nome da lista que colocamos dessa pagina
             //Remove => Comando que iremos realizar 
             bd.Alunos.Remove(alunos);
