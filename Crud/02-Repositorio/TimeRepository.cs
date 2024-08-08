@@ -9,7 +9,7 @@ namespace Crud.Repositorio
 {
     public class TimeRepository
     {
-        public SimuladorBD bd { get; set; }//Propriedade para o bancco
+        public SimuladorBD bd { get; set; }//Chamar o banco de dados
 
         public TimeRepository(SimuladorBD bdPreenchido)
         {

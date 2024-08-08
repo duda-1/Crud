@@ -10,8 +10,8 @@ namespace Crud.Entidades
     {
         public string Id { get; set; }
         public string Nome { get; set; }
-        public int idade { get; set; }
-        public int peso { get; set; }
+        public int Idade { get; set; }
+        public int Peso { get; set; }
     }
     }
 }
