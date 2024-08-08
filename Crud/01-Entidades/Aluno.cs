@@ -8,10 +8,10 @@ namespace Crud.Entidades
 {
     public class Aluno
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public int Idade { get; set; }
-        public int Peso { get; set; }
+        public double Peso { get; set; }
     
     }
 }

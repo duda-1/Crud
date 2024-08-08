@@ -32,8 +32,8 @@ List<Time> times = service.Listar();
 
 foreach (Time t in times)
 {
-    Console.WriteLine($"{t.Id}");
-    Console.WriteLine($"{t.Nome}");
+    Console.WriteLine($"{t.Id}"+
+                     $"\n{t.Nome}");
 }
 
 service.Excluir(time1);
@@ -42,4 +42,52 @@ int id = 1;
 Time timeEscolhido = service.BuscarPorId(id);
 Console.WriteLine(timeEscolhido);
 
+//Aluno
+AlunoService service1 = new AlunoService(contex);
 
+Aluno aluno1 = new Aluno()
+{
+    Id = 1,
+    Nome = "Julia Rocha",
+    Idade = 16 ,
+    Peso =  53,
+};
+Aluno aluno2 = new Aluno()
+{
+    Id = 1,
+    Nome = "Mirela Aparecida",
+    Idade = 16,
+    Peso = 52,
+};
+Aluno aluno3 = new Aluno()
+{
+    Id = 1,
+    Nome = "Lavinia Couto ",
+    Idade = 17,
+    Peso = 50,
+};
+
+//Cidade 
+CidadeService service2 = new CidadeService(contex);
+
+Aluno aluno1 = new Aluno()
+{
+    Id = 1,
+    Nome = "Julia Rocha",
+    Idade = 16,
+    Peso = 53,
+};
+Aluno aluno2 = new Aluno()
+{
+    Id = 1,
+    Nome = "Mirela Aparecida",
+    Idade = 16,
+    Peso = 52,
+};
+Aluno aluno3 = new Aluno()
+{
+    Id = 1,
+    Nome = "Lavinia Couto ",
+    Idade = 17,
+    Peso = 50,
+};
