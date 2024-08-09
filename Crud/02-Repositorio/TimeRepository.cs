@@ -37,7 +37,7 @@ namespace Crud.Repositorio
             return bd.Times.ToList();
         }
 
-        internal Time BuscarPorId(int id)
+        public Time BuscarPorId(int id)
         {
            foreach(Time t in bd.Times)
            {
