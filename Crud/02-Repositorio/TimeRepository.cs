@@ -11,6 +11,7 @@ namespace Crud.Repositorio
     {
         public SimuladorBD bd { get; set; }//Chamar o banco de dados
 
+        //Construtor
         public TimeRepository(SimuladorBD bdPreenchido)
         {
             bd = bdPreenchido;

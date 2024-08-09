@@ -31,10 +31,10 @@ namespace Crud.Aplicação
         }
 
         public List<Time> Listar()
-        { 
+        {
             //Pode fazer alterações 
-            List<Time> t = repository.Listar().OrderBy(x => x.Nome).ToList();
-            return t;
+            return repository.Listar();
+             
         }
 
         public Time BuscarPorId(int id)
