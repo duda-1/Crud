@@ -70,24 +70,22 @@ Aluno aluno3 = new Aluno()
 //Cidade 
 CidadeService service2 = new CidadeService(contex);
 
-Aluno aluno1 = new Aluno()
+Cidade cidade1 = new Cidade()
 {
     Id = 1,
-    Nome = "Julia Rocha",
-    Idade = 16,
-    Peso = 53,
+   NomeCidade = "Sabará",
+    NumHabitantes =  1000,
+
 };
-Aluno aluno2 = new Aluno()
+Cidade cidade2 = new Cidade()
 {
-    Id = 1,
-    Nome = "Mirela Aparecida",
-    Idade = 16,
-    Peso = 52,
+    Id = 2,
+    NomeCidade = "Caete",
+    NumHabitantes = 1000,
 };
-Aluno aluno3 = new Aluno()
+Cidade cidade3 = new Cidade()
 {
-    Id = 1,
-    Nome = "Lavinia Couto ",
-    Idade = 17,
-    Peso = 50,
+    Id = 3,
+    NomeCidade = "Nova Lima",
+    NumHabitantes = 1000,
 };
