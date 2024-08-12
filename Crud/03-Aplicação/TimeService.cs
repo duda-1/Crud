@@ -41,5 +41,10 @@ namespace Crud.Aplicação
         {
            return repository.BuscarPorId(id);
         }
+
+        public void Editar(int id, Time time)
+        {
+            repository.Editar(id, time);   
+        }
     }
 }

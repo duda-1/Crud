@@ -27,9 +27,12 @@ namespace Crud.Repositorio
             bd.Times.Remove(time);
         }
 
-        public void Editar()
+        public void Editar(int id, Time editarTime)
         {
+            Time timeBancoDeDados = BuscarPorId(id);
 
+            timeBancoDeDados.Nome = editarTime.Nome;
+            timeBancoDeDados.AnoCriacao = editarTime.AnoCriacao;
         }
 
         public List<Time> Listar()

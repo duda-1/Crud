@@ -32,15 +32,28 @@ List<Time> times = service.Listar();
 
 foreach (Time t in times)
 {
-    Console.WriteLine($"{t.Id}"+
-                     $"\n{t.Nome}");
+    Console.WriteLine($"id: {t.Id}"+
+                     $"\nNome do Time: {t.Nome}");
 }
 
 service.Excluir(time1);
 
-int id = 1;
-Time timeEscolhido = service.BuscarPorId(id);
-Console.WriteLine(timeEscolhido);
+int id = 2;
+//Time timeEscolhido = service.BuscarPorId(id);
+//Console.WriteLine(timeEscolhido);
+
+Time editartime = new Time();
+editartime.Nome = "Psg";
+editartime.AnoCriacao =  1999;
+service.Editar(id, editartime);
+
+service.Listar();
+foreach (Time t in times)
+{
+    Console.WriteLine("---------------------------------");
+    Console.WriteLine($"id: {t.Id}" +
+                     $"\nNome do Time: {t.Nome}");
+}
 
 //Aluno
 AlunoService service1 = new AlunoService(contex);
@@ -66,6 +79,29 @@ Aluno aluno3 = new Aluno()
     Idade = 17,
     Peso = 50,
 };
+List<Aluno> alunos = service1.Listar();
+
+service1.Adicionar(aluno1);
+service1.Adicionar(aluno2);
+service1.Adicionar(aluno3);
+
+int Id = 2;
+Aluno editarAluno = new Aluno();
+editarAluno.Nome = "Psg";
+editarAluno.Idade = 17;
+editarAluno.Peso = 55;
+service1.Editar(Id, editarAluno);
+
+service.Listar();
+foreach (Aluno a in alunos)
+{
+    Console.WriteLine("---------------------------------");
+    Console.WriteLine($"id: {a.Id}" +
+                     $"\nNome do Aluno: {a.Nome}" +
+                     $"\nIdade : {a.Idade}" +
+                     $"\nPeso :{a.Peso}");
+}
+
 
 //Cidade 
 CidadeService service2 = new CidadeService(contex);
@@ -89,3 +125,23 @@ Cidade cidade3 = new Cidade()
     NomeCidade = "Nova Lima",
     NumHabitantes = 1000,
 };
+
+service2.Adicionar(cidade1);
+service2.Adicionar(cidade2);
+service2.Adicionar(cidade3);
+List<Cidade> cidades = service2.Listar();
+
+int ID = 3;
+Cidade editarCidade = new Cidade();
+editarCidade.NomeCidade = "Belo Horizonte";
+editarCidade.NumHabitantes = 17000;
+service2.Editar(ID, editarCidade);
+
+service.Listar();
+foreach (Cidade c in cidades)
+{
+    Console.WriteLine("---------------------------------");
+    Console.WriteLine($"id: {c.Id}" +
+                     $"\nNome da Cidade: {c.NomeCidade}" +
+                     $"\nNumero de Habotantes: {c.NumHabitantes}");
+}

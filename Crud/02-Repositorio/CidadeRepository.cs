@@ -26,14 +26,29 @@ namespace Crud.Repositorio
             bd.Cidades.Remove(cidades);
         }
 
-        public void Editar()
+        public void Editar(int id , Cidade editarCidade)
         {
+            Cidade cidadeBancoDeDados = BuscarPorId(id);
 
+            cidadeBancoDeDados.NomeCidade = editarCidade.NomeCidade;
+            cidadeBancoDeDados.NumHabitantes = editarCidade.NumHabitantes;
         }
 
         public List<Cidade> Listar()
         {
             return bd.Cidades.ToList();
+        }
+
+        public Cidade BuscarPorId(int id)
+        {
+            foreach (Cidade c in bd.Cidades)
+            {
+                if (id == c.Id)
+                {
+                    return c;
+                }
+            }
+            return null;
         }
 
     }

@@ -32,9 +32,14 @@ namespace Crud.Aplicação
             repository.Remover(alunos);
         }
 
-        public void Editar()
+        public void Editar(int id , Aluno aluno)
         {
+            repository.Editar(id, aluno);
+        }
 
+        public Aluno BuscarPorId(int id)
+        {
+            return repository.BuscarPorId(id);
         }
 
         public List<Aluno> Listar()

@@ -35,8 +35,13 @@ namespace Crud.Repositorio
             bd.Alunos.Remove(alunos);
         }
 
-        public void Editar()
+        public void Editar(int id, Aluno editarAluno)
         {
+            Aluno alunoBancoDeDados = BuscarPorId(id);
+
+            alunoBancoDeDados.Nome = editarAluno.Nome;
+            alunoBancoDeDados.Idade= editarAluno.Idade;
+            alunoBancoDeDados.Peso = editarAluno.Peso;
 
         }
 
@@ -45,6 +50,19 @@ namespace Crud.Repositorio
             //Nesse metodo ele tem retorno de uma lista pois ele tem que devolver algo
             //ao inverso das outras que retornam void .
             return bd.Alunos.ToList();
+        }
+
+        public Aluno BuscarPorId(int id)
+        {
+            //Nesse metodo 
+            foreach (Aluno a in bd.Alunos)
+            {
+                if (id == a.Id)
+                {
+                    return a;
+                }
+            }
+            return null;
         }
     }
 }

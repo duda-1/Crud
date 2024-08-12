@@ -29,14 +29,19 @@ namespace Crud.Aplicação
           repository.Remover(cidades);
         }
 
-        public void Editar()
+        public void Editar(int id, Cidade cidade)
         {
-
+            repository.Editar(id, cidade);
         }
 
         public List<Cidade> Listar()
         {
            return repository.Listar();
+        }
+
+        public Cidade BuscarPorId(int id)
+        {
+            return repository.BuscarPorId(id);
         }
     }
 }
