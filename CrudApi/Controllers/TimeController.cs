@@ -8,12 +8,12 @@ namespace CrudApi.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class TimeControler : ControllerBase
+    public class TimeController : ControllerBase
     {
         private TimeService _service;
         private SimuladorBD bd;
 
-        public TimeControler(SimuladorBD bdSistema) 
+        public TimeController(SimuladorBD bdSistema) 
         {
             bd = bdSistema;
             _service = new TimeService(bd);
@@ -34,7 +34,21 @@ namespace CrudApi.Controllers
         [HttpGet("Listar_Time")]
         public List<Time> GetListarTime()
         {
-            return null;
+            return _service.Listar();
         }
+
+        [HttpDelete("Remover_Time")]
+        public void Removerime(int id)
+        {
+            _service.Remover(id);
+        }
+
+        [HttpPut("Atualizar_Time")]
+        public void AtualizarTime(Time time, int id)
+        {
+            _service.Editar(id, time);
+        }
+
+
     }
 }

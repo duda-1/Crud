@@ -25,8 +25,10 @@ namespace Crud.Aplicação
             repository.Adicionar(time);
         }
 
-        public void Excluir(Time time)
+        public void Remover(int id)
         {
+            Time time;
+            id = time;
             repository.Remover(time);
         }
 

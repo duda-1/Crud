@@ -36,7 +36,7 @@ foreach (Time t in times)
                      $"\nNome do Time: {t.Nome}");
 }
 
-service.Excluir(time1);
+service.Remover(time1);
 
 int id = 2;
 //Time timeEscolhido = service.BuscarPorId(id);
