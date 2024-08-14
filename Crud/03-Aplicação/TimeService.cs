@@ -27,9 +27,8 @@ namespace Crud.Aplicação
 
         public void Remover(int id)
         {
-            Time time;
-            id = time;
-            repository.Remover(time);
+            Time t = BuscarPorId(id);
+            repository.Remover(t);
         }
 
         public List<Time> Listar()

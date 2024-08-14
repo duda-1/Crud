@@ -24,9 +24,10 @@ namespace Crud.Aplicação
             repository.Adicionar(cidades);
         }
 
-        public void Remover(Cidade cidades)
+        public void Remover(int id)
         {
-          repository.Remover(cidades);
+            Cidade c = BuscarPorId(id);
+          repository.Remover(c);
         }
 
         public void Editar(int id, Cidade cidade)

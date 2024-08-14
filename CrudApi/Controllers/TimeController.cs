@@ -20,16 +20,11 @@ namespace CrudApi.Controllers
         }
 
         [HttpPost ("Adicionar_Time")]
-        public void AdicionmarTime(Time t)
+        public void AdicionmarTime([FromQuery] Time t)
         {
             _service.Adicionar(t);
         }
 
-        [HttpGet ("Adicionar_Time")]
-        public void GetAdicionarTime()
-        {
-
-        }
 
         [HttpGet("Listar_Time")]
         public List<Time> GetListarTime()
@@ -38,7 +33,7 @@ namespace CrudApi.Controllers
         }
 
         [HttpDelete("Remover_Time")]
-        public void Removerime(int id)
+        public void RemoverTime(int id)
         {
             _service.Remover(id);
         }
