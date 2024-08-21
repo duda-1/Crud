@@ -32,6 +32,12 @@ namespace CrudApi.Controllers
             return _service.Listar();
         }
 
+        [HttpGet("Buscar_Por_Id")]
+        public void BuscarTimePorId(int id)
+        {
+            _service.BuscarPorId(id);
+        }
+
         [HttpDelete("Remover_Time")]
         public void RemoverTime(int id)
         {
