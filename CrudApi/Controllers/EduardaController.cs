@@ -14,18 +14,18 @@ namespace CrudApi.Controllers
         {
         }
             [HttpPost("Editar_Registro")]
-            public void AdicionmarTime([FromQuery] Time t)
+            public void AdicionmarTime( )
             {
                
             }
 
             [HttpPut("Atualizar_Time")]
-            public void AtualizarTime(Time time, int id)
+            public void AtualizarTime()
             {
                 
             }
-        }
-
-
     }
+
+
+    
 }
