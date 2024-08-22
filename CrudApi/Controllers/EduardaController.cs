@@ -19,7 +19,7 @@ namespace CrudApi.Controllers
                
             }
 
-            [HttpPut("Atualizar_Time")]
+            [HttpPut("Atualizar_Registro")]
             public void AtualizarTime()
             {
                 
