@@ -1,6 +1,7 @@
 ﻿using Crud.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,8 @@ namespace Crud.Repositorio
 {
     public class TimeRepository
     {
-        public SimuladorBD bd { get; set; }//Chamar o banco de dados
+        public SimuladorBD bd { get; set; }
+        private const string ConnectionString = "Data Source=CRUD.db";
 
         //Construtor
         public TimeRepository(SimuladorBD bdPreenchido)
@@ -17,39 +19,97 @@ namespace Crud.Repositorio
             bd = bdPreenchido;
         }
 
-        public void Adicionar(Time time)
-        { 
-            bd.Times.Add(time);
+        public void Adicionar(Time t)
+        {
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                string commandInsert = @"INSERT INTO Times(Nome,AnoCriacao) 
+                                    VALUES (@Nome,@AnoCriacao)";
+
+                using (var command = new SQLiteCommand(commandInsert, connection))
+                {
+                    command.Parameters.AddWithValue("@Nome", t.Nome);
+                    command.Parameters.AddWithValue("@AnoCriacao", t.AnoCriacao);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
-        public void Remover(Time time)
+        public void Remover(int id)
         {
-            bd.Times.Remove(time);
+
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                string deleteCommand = "DELETE FROM Times WHERE Id = @Id;";
+
+                using (var command = new SQLiteCommand(deleteCommand, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
-        public void Editar(int id, Time editarTime)
+        public void Editar(int id, string nome, int anocriacao)
         {
-            Time timeBancoDeDados = BuscarPorId(id);
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                var updateCommand = @"UPDATE Times
+                                SET Nome = @Nome, AnoCriacao = @AnoCriacao
+                                WHERE Id = @Id;";
 
-            timeBancoDeDados.Nome = editarTime.Nome;
-            timeBancoDeDados.AnoCriacao = editarTime.AnoCriacao;
+                using (var command = new SQLiteCommand(updateCommand, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.Parameters.AddWithValue("@Nome", nome);
+                    command.Parameters.AddWithValue("@AnoCriacao", anocriacao);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
-        public List<Time> Listar()
+        public void Listar()
         {
-            return bd.Times.ToList();
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                var selectCommand = "SELECT Id, Nome, AnoCriacao FROM Times;";
+
+                using (var command = new SQLiteCommand(selectCommand, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine($" Id: {reader["Id"]} - Nome: {reader["Nome"]} - AnoCriacao: {reader["AnoCriacao"]}");
+                        }
+                    }
+                }
+            }
         }
 
-        public Time BuscarPorId(int id)
+        public void BuscarPorId(int id)
         {
-           foreach(Time t in bd.Times)
-           {
-              if(id == t.Id)
-              {
-                    return t;
-              }
-           }
-            return null;
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                var selectCommand = "SELECT Id, Nome, AnoCriacao FROM Times WHERE Id = @Id;";
+
+                using (var command = new SQLiteCommand(selectCommand, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine($" Id: {reader["Id"]} - Nome: {reader["Nome"]} - AnoCriacao: {reader["AnoCriacao"]}");
+                        }
+                    }
+                }
+            }
         }
     }
   
