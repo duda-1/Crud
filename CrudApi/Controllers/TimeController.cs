@@ -45,9 +45,9 @@ namespace CrudApi.Controllers
         }
 
         [HttpPut("Atualizar_Time")]
-        public void AtualizarTime(Time time, int id)
+        public void Atualizar_Time(int id, string nome, int anocriacao)
         {
-            _service.Editar(id, time);
+            _service.Editar(id, nome, anocriacao);
         }
 
 

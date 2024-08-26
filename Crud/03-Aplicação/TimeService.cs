@@ -30,21 +30,21 @@ namespace Crud.Aplicação
             repository.Remover(id);
         }
 
-        public void Listar()
+        public List<Time> Listar()
         {
             //Pode fazer alterações 
-           repository.Listar();
+          return repository.Listar();
              
         }
 
-        public Time BuscarPorId(int id)
+        public void BuscarPorId(int id)
         {
-           return repository.BuscarPorId(id);
+          repository.BuscarPorId(id);
         }
 
-        public void Editar(int id, Time time)
+        public void Editar(int id, string nome, int anocriacao)
         {
-            repository.Editar(id, time);   
+            repository.Editar(id, nome, anocriacao);   
         }
     }
 }

@@ -71,8 +71,9 @@ namespace Crud.Repositorio
             }
         }
 
-        public void Listar()
+        public List<Time> Listar()
         {
+            List<Time> time = new List<Time>();
             using (var connection = new SQLiteConnection(ConnectionString))
             {
                 connection.Open();
@@ -83,12 +84,20 @@ namespace Crud.Repositorio
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
-                        {
-                            Console.WriteLine($" Id: {reader["Id"]} - Nome: {reader["Nome"]} - AnoCriacao: {reader["AnoCriacao"]}");
+                        {//Construir um objeto de Time
+                            Time t = new Time();
+                            t.Id = int.Parse(reader["Id"].ToString());
+                            t.Nome = reader["Id"].ToString();
+                            t.AnoCriacao = int.Parse(reader["AnoCriacao"].ToString());
+                           time.Add(t);
+                         //adicionar na lista
+                         
+                         // Console.WriteLine($" Id: {reader["Id"]} - Nome: {reader["Nome"]} - AnoCriacao: {reader["AnoCriacao"]}");
                         }
                     }
                 }
             }
+            return time;
         }
 
         public void BuscarPorId(int id)
