@@ -29,9 +29,9 @@ namespace Crud.Aplicação
           repository.Remover(id);
         }
 
-        public void Editar(int id, string nomeCidade, int numHabitante)
+        public void Editar(int id, Cidade c)
         {
-            repository.Editar(id, nomeCidade, numHabitante);
+            repository.Editar(id, c.NomeCidade, c.NumHabitantes);
 );
         }
 
