@@ -32,7 +32,7 @@ namespace Crud.Aplicação
         public void Editar(int id, Cidade c)
         {
             repository.Editar(id, c.NomeCidade, c.NumHabitantes);
-);
+
         }
 
         public List<Cidade> Listar()
