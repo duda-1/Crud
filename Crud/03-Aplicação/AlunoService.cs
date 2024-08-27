@@ -29,13 +29,12 @@ namespace Crud.Aplicação
 
         public void Remover(int id)
         {
-            Aluno a =BuscarPorId(id);
-            repository.Remover(a);
+            repository.Remover(id);
         }
 
-        public void Editar(int id , Aluno aluno)
+        public void Editar(int id, string nome, int idade, double peso)
         {
-            repository.Editar(id, aluno);
+            repository.Editar(id, nome,idade, peso);
         }
 
         public Aluno BuscarPorId(int id)

@@ -26,13 +26,13 @@ namespace Crud.Aplicação
 
         public void Remover(int id)
         {
-            Cidade c = BuscarPorId(id);
-          repository.Remover(c);
+          repository.Remover(id);
         }
 
-        public void Editar(int id, Cidade cidade)
+        public void Editar(int id, string nomeCidade, int numHabitante)
         {
-            repository.Editar(id, cidade);
+            repository.Editar(id, nomeCidade, numHabitante);
+);
         }
 
         public List<Cidade> Listar()

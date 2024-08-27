@@ -1,37 +1,73 @@
 ﻿using Crud.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Crud.Repositorio
 {
     public class CidadeRepository
     {
         public SimuladorBD bd { get; set; }
+        private const string ConnectionString = "Data Source=CRUD.db";
 
         public CidadeRepository(SimuladorBD bdprenxido)
         {
             bd = bdprenxido;
         }
 
-        public void Adicionar(Cidade cidades)
+        public void Adicionar(Cidade c)
         {
-            bd.Cidades.Add(cidades);
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                string commandInsert = @"INSERT INTO Cidades(NomeCidade,NumHabitantes) 
+                                    VALUES (@NomeCidade,@NumHabitantes)";
+
+                using (var command = new SQLiteCommand(commandInsert, connection))
+                {
+                    command.Parameters.AddWithValue("@NomeCidade", c.NomeCidade);
+                    command.Parameters.AddWithValue("@NumHabitantes", c.NumHabitantes);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
-        public void Remover(Cidade cidades)
+        public void Remover(int id)
         {
-            bd.Cidades.Remove(cidades);
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                string deleteCommand = "DELETE FROM Cidades WHERE Id = @Id;";
+
+                using (var command = new SQLiteCommand(deleteCommand, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
-        public void Editar(int id , Cidade editarCidade)
+        public void Editar(int id , string nomeCidade, int numHabitante)
         {
-            Cidade cidadeBancoDeDados = BuscarPorId(id);
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                var updateCommand = @"UPDATE Cidade
+                                SET NomeCidade = @NomeCidade,  NumHabitante = @NumHabitante
+                                WHERE Id = @Id;";
 
-            cidadeBancoDeDados.NomeCidade = editarCidade.NomeCidade;
-            cidadeBancoDeDados.NumHabitantes = editarCidade.NumHabitantes;
+                using (var command = new SQLiteCommand(updateCommand, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.Parameters.AddWithValue("@NomeCidade", nomeCidade);
+                    command.Parameters.AddWithValue("@ NumHabitante", numHabitante);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
         public List<Cidade> Listar()

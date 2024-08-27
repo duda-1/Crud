@@ -87,7 +87,7 @@ namespace Crud.Repositorio
                         {//Construir um objeto de Time
                             Time t = new Time();
                             t.Id = int.Parse(reader["Id"].ToString());
-                            t.Nome = reader["Id"].ToString();
+                            t.Nome = reader["Nome"].ToString();
                             t.AnoCriacao = int.Parse(reader["AnoCriacao"].ToString());
                            time.Add(t);
                          //adicionar na lista

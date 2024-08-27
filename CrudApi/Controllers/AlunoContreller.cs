@@ -35,10 +35,10 @@ namespace CrudApi.Controllers
             _service.Remover(id);
         }
 
-        [HttpPut("Atualizar_Aluno")]
-        public void AtualizarAluno(Aluno aluno, int id)
+        [HttpPut("Editar_Aluno")]
+        public void EditarAluno(int id, string nome, int idade, double peso)
         {
-            _service.Editar(id, aluno);
+            _service.Editar(id, nome,idade, peso);
         }
     }
 }
