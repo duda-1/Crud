@@ -51,20 +51,20 @@ namespace Crud.Repositorio
             }
         }
 
-        public void Editar(int id , string nomeCidade, int numHabitante)
+        public void Editar(int id , string nomeCidade, int numHabitantes)
         {
             using (var connection = new SQLiteConnection(ConnectionString))
             {
                 connection.Open();
-                var updateCommand = @"UPDATE Cidade
-                                SET NomeCidade = @NomeCidade,  NumHabitante = @NumHabitante
+                var updateCommand = @"UPDATE Cidades
+                                SET NomeCidade = @NomeCidade,  NumHabitantes = @NumHabitantes
                                 WHERE Id = @Id;";
 
                 using (var command = new SQLiteCommand(updateCommand, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
                     command.Parameters.AddWithValue("@NomeCidade", nomeCidade);
-                    command.Parameters.AddWithValue("@ NumHabitante", numHabitante);
+                    command.Parameters.AddWithValue("@NumHabitantes", numHabitantes);
                     command.ExecuteNonQuery();
                 }
             }
@@ -72,7 +72,28 @@ namespace Crud.Repositorio
 
         public List<Cidade> Listar()
         {
-            return bd.Cidades.ToList();
+            List<Cidade> cidade = new List<Cidade>();
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                var selectCommand = "SELECT Id, NomeCidade, NumHabitantes FROM Cidades;";
+
+                using (var command = new SQLiteCommand(selectCommand, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Cidade c = new Cidade();
+                            c.Id = int.Parse(reader["Id"].ToString());
+                            c.NomeCidade = reader["NomeCidade"].ToString();
+                            c.NumHabitantes = int.Parse(reader["NumHabitantes"].ToString());
+                            cidade.Add(c);
+                        }
+                    }
+                }
+            }
+            return cidade;
         }
 
         public Cidade BuscarPorId(int id)

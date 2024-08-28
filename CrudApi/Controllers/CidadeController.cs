@@ -36,9 +36,9 @@ namespace CrudApi.Controllers
         }
 
         [HttpPut("Editar_Cidade")]
-        public void EditarCidade(int id, Cidade c)
+        public void EditarCidade(int id, Cidade cidade)
         {
-            _service.Editar(id, c.NomeCidade, c.NumHabitantes);
+            _service.Editar(id, cidade);
         }
     }
 }
