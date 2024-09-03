@@ -10,11 +10,12 @@ namespace Crud.Repositorio
 {
     public class TimeRepository
     {
-        private const string ConnectionString = "Data Source=CRUD.db";
+        private readonly string ConnectionString;
 
         //Construtor
-        public TimeRepository()
+        public TimeRepository(IConfiguration configuration)//Interface que me ajuda apegar valores do appsettings.json
         {
+            ConnectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public void Adicionar(Time t)

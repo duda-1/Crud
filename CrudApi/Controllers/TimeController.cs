@@ -12,9 +12,9 @@ namespace CrudApi.Controllers
     {
         private TimeService _service;
 
-        public TimeController() 
+        public TimeController(IConfiguration configuration) 
         {
-            _service = new TimeService();
+            _service = new TimeService(configuration);
         }
 
         [HttpPost ("Adicionar_Time")]
