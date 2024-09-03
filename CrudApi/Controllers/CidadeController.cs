@@ -8,12 +8,10 @@ namespace CrudApi.Controllers
     public class CidadeController : ControllerBase
     {
         private CidadeService _service;
-        private SimuladorBD bd;
 
-        public CidadeController(SimuladorBD bdSistema)
+        public CidadeController()
         {
-            bd = bdSistema;
-            _service = new CidadeService(bd);
+            _service = new CidadeService();
         }
 
         [HttpPost("Adicionar_Cidade")]

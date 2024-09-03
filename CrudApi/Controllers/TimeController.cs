@@ -11,12 +11,10 @@ namespace CrudApi.Controllers
     public class TimeController : ControllerBase
     {
         private TimeService _service;
-        private SimuladorBD bd;
 
-        public TimeController(SimuladorBD bdSistema) 
+        public TimeController() 
         {
-            bd = bdSistema;
-            _service = new TimeService(bd);
+            _service = new TimeService();
         }
 
         [HttpPost ("Adicionar_Time")]

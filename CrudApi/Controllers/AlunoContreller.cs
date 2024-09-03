@@ -8,12 +8,10 @@ namespace CrudApi.Controllers
     public class AlunoContreller : ControllerBase
     {
         private AlunoService _service;
-        private SimuladorBD bd;
 
-        public AlunoContreller(SimuladorBD bdSistema)
+        public AlunoContreller()
         {
-            bd = bdSistema;
-            _service = new AlunoService(bd);
+            _service = new AlunoService();
         }
 
         [HttpPost("Adicionar_Aluno")]
