@@ -12,7 +12,7 @@ namespace CrudApi.Controllers
     {
         private TimeService _service;
 
-        public TimeController(IConfiguration configuration) 
+        public TimeController(IConfiguration configuration) //pegar connection string
         {
             _service = new TimeService(configuration);
         }

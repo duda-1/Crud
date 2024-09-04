@@ -1,15 +1,12 @@
-using Crud;
 using Crud._02_Repositorio.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 InicializadorBd.Inicializar();
-
 var app = builder.Build();
 
 
