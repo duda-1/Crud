@@ -5,13 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CrudApi.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class CidadeController : ControllerBase
     {
         private CidadeService _service;
 
-        public CidadeController()
+        public CidadeController(IConfiguration configuration)
         {
-            _service = new CidadeService();
+            _service = new CidadeService(configuration);
         }
 
         [HttpPost("Adicionar_Cidade")]

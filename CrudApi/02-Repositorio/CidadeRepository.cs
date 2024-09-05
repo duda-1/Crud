@@ -12,11 +12,11 @@ namespace Crud.Repositorio
     public class CidadeRepository
     {
 
-        private const string ConnectionString = "Data Source=CRUD.db";
+        private readonly string ConnectionString;
 
-        public CidadeRepository()
+        public CidadeRepository(IConfiguration configuration)
         {
-
+            ConnectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public void Adicionar(Cidade c)

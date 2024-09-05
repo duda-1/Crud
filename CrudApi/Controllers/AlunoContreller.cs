@@ -5,13 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CrudApi.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class AlunoContreller : ControllerBase
     {
         private AlunoService _service;
 
-        public AlunoContreller()
+        public AlunoContreller(IConfiguration configuration)
         {
-            _service = new AlunoService();
+            _service = new AlunoService(configuration);
         }
 
         [HttpPost("Adicionar_Aluno")]

@@ -10,12 +10,13 @@ namespace Crud.Repositorio
 {
     public class AlunoRepository
     {
+
         //Essa classe passa todos os dados para o nosso banco de dados
-        private const string ConnectionString = "Data Source=CRUD.db";//Chamar o banco de dados
+        private readonly string ConnectionString;//Chamar o banco de dados
 
-        public AlunoRepository()
+        public AlunoRepository(IConfiguration configuration)
         {
-
+            ConnectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public void Adicionar(Aluno a)

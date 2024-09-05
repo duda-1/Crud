@@ -16,9 +16,9 @@ namespace Crud.Aplicação
         public AlunoRepository repository { get; set; }//Mando para a pagina do repositorio antes de mandar
                                                        //para o Banco de Dados
 
-        public AlunoService()
+        public AlunoService(IConfiguration configuration)
         {
-            repository = new AlunoRepository();
+            repository = new AlunoRepository(configuration);
         }
 
         public void Adicionar(Aluno alunos)
