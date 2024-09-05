@@ -31,14 +31,14 @@ namespace Crud.Aplicação
             repository.Remover(id);
         }
 
-        public void Editar(int id, string nome, int idade, double peso)
+        public void Editar(Aluno a)
         {
-            repository.Editar(id, nome,idade, peso);
+            repository.Editar(a);
         }
 
-        public void BuscarPorId(int id)
+        public Aluno BuscarPorId(int id)
         {
-            repository.BuscarPorId(id);
+           return repository.BuscarPorId(id);
         }
 
         public List<Aluno> Listar()

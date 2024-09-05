@@ -1,4 +1,5 @@
 ﻿using Crud.Entidades;
+using Dapper.Contrib.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -21,107 +22,34 @@ namespace Crud.Repositorio
 
         public void Adicionar(Aluno a)
         {
-            using (var connection = new SQLiteConnection(ConnectionString))
-            {
-                connection.Open();
-                string commandInsert = @"INSERT INTO Alunos(Nome,Idade,Peso) 
-                                    VALUES (@Nome,@Idade,@Peso)";
-
-                using (var command = new SQLiteCommand(commandInsert, connection))
-                {
-                    command.Parameters.AddWithValue("@Nome", a.Nome);
-                    command.Parameters.AddWithValue("@Idade", a.Idade);
-                    command.Parameters.AddWithValue("@Peso", a.Peso);
-                    command.ExecuteNonQuery();
-                }
-            }
+            using var connection = new SQLiteConnection(ConnectionString);
+            connection.Insert<Aluno>(a);
         }
 
         public void Remover(int id)
         {
-            using (var connection = new SQLiteConnection(ConnectionString))
-            {
-                connection.Open();
-                string deleteCommand = "DELETE FROM Alunos WHERE Id = @Id;";
-
-                using (var command = new SQLiteCommand(deleteCommand, connection))
-                {
-                    command.Parameters.AddWithValue("@Id", id);
-                    command.ExecuteNonQuery();
-                }
-            }
+            using var connection = new SQLiteConnection(ConnectionString);
+            Aluno novoAluno = BuscarPorId(id);
+            connection.Delete<Aluno>(novoAluno);
         }
 
-        public void Editar(int id,string nome,int idade, double peso)
+        public void Editar(Aluno a)
         {
-            using (var connection = new SQLiteConnection(ConnectionString))
-            {
-                connection.Open();
-                var updateCommand = @"UPDATE Alunos
-                                SET Nome = @Nome, Idade = @Idade ,Peso = @Peso
-                                WHERE Id = @Id;";
-
-                using (var command = new SQLiteCommand(updateCommand, connection))
-                {
-                    command.Parameters.AddWithValue("@Id", id);
-                    command.Parameters.AddWithValue("@Nome", nome);
-                    command.Parameters.AddWithValue("@Idade", idade);
-                    command.Parameters.AddWithValue("@Peso", peso);
-                    command.ExecuteNonQuery();
-                }
-            }
+            using var connection = new SQLiteConnection(ConnectionString);
+            connection.Update<Aluno>(a);
 
         }
 
         public List<Aluno> Listar()
         {
-            List<Aluno> aluno = new List<Aluno>();
-            using (var connection = new SQLiteConnection(ConnectionString))
-            {
-                connection.Open();
-                var selectCommand = "SELECT Id, Nome, Idade, Peso FROM Alunos;";
-
-                using (var command = new SQLiteCommand(selectCommand, connection))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {//Construir um objeto de Time
-                            Aluno a = new Aluno();
-                            a.Id = int.Parse(reader["Id"].ToString());
-                            a.Nome = reader["Nome"].ToString();
-                            a.Idade = int.Parse(reader["Idade"].ToString());
-                            a.Peso = double.Parse(reader["Peso"].ToString());
-                            aluno.Add(a);
-                            //adicionar na lista
-
-                            // Console.WriteLine($" Id: {reader["Id"]} - Nome: {reader["Nome"]} - AnoCriacao: {reader["AnoCriacao"]}");
-                        }
-                    }
-                }
-            }
-            return aluno;
+            using var connection = new SQLiteConnection(ConnectionString);
+            return connection.GetAll<Aluno>().ToList();
         }
 
-        public void BuscarPorId(int id)
+        public Aluno BuscarPorId(int id)
         {
-            using (var connection = new SQLiteConnection(ConnectionString))
-            {
-                connection.Open();
-                var selectCommand = "SELECT Id, Nome, Idade, Peso FROM Alunos WHERE Id = @Id;";
-
-                using (var command = new SQLiteCommand(selectCommand, connection))
-                {
-                    command.Parameters.AddWithValue("@Id", id);
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Console.WriteLine($" Id: {reader["Id"]} - Nome: {reader["Nome"]} - Idade: {reader["Idade"]}  - Peso: {reader["Peso"]}");
-                        }
-                    }
-                }
-            }
+            using var connection = new SQLiteConnection(ConnectionString);
+            return connection.Get<Aluno>(id);
         }
     }
 }

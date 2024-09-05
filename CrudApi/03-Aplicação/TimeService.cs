@@ -35,14 +35,14 @@ namespace Crud.Aplicação
              
         }
 
-        public void BuscarPorId(int id)
+        public Time BuscarPorId(int id)
         {
-          repository.BuscarPorId(id);
+          return repository.BuscarPorId(id);
         }
 
-        public void Editar(int id, string nome, int anocriacao)
+        public void Editar(Time t)
         {
-            repository.Editar(id, nome, anocriacao);   
+            repository.Editar(t);   
         }
     }
 }

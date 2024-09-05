@@ -42,10 +42,10 @@ namespace CrudApi.Controllers
             _service.Remover(id);
         }
 
-        [HttpPut("Atualizar_Time")]
-        public void Atualizar_Time(int id, string nome, int anocriacao)
+        [HttpPut("Editar_Time")]
+        public void Editar_Time([FromQuery] Time t)
         {
-            _service.Editar(id, nome, anocriacao);
+            _service.Editar(t);
         }
 
 
