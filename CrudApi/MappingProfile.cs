@@ -9,6 +9,8 @@ namespace CrudApi
         public MappingProfile()
         {
             CreateMap<CreateTimeDTO, Time>().ReverseMap();
+            CreateMap<CreateAlunoDTO, Aluno>().ReverseMap();
+            CreateMap<CreateCidadeDTO, Cidade>().ReverseMap();
         }
     }
 }

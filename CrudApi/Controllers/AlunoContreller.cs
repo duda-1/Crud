@@ -3,6 +3,7 @@ using Crud.Entidades;
 using Crud;
 using Microsoft.AspNetCore.Mvc;
 using CrudApi._01_Entidades.DTO;
+using AutoMapper;
 
 namespace CrudApi.Controllers
 {
@@ -11,19 +12,17 @@ namespace CrudApi.Controllers
     public class AlunoContreller : ControllerBase
     {
         private AlunoService _service;
-
-        public AlunoContreller(IConfiguration configuration)
+        private readonly IMapper _mapper;
+        public AlunoContreller(IMapper mapper,IConfiguration configuration)
         {
             _service = new AlunoService(configuration);
+            _mapper = mapper;
         }
 
         [HttpPost("Adicionar_Aluno")]
         public void AdicionmarAluno([FromQuery] CreateAlunoDTO a)
         {
-            Aluno aluno = new Aluno();
-            aluno.Nome = a.Nome;
-            aluno.Idade = a.Idade;
-            aluno.Peso = a.Peso;
+            Aluno aluno = _mapper.Map<Aluno>(a);
             _service.Adicionar(aluno);
         }
 

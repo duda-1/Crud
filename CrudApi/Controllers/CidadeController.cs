@@ -3,6 +3,7 @@ using Crud.Entidades;
 using Crud;
 using Microsoft.AspNetCore.Mvc;
 using CrudApi._01_Entidades.DTO;
+using AutoMapper;
 
 namespace CrudApi.Controllers
 {
@@ -11,18 +12,17 @@ namespace CrudApi.Controllers
     public class CidadeController : ControllerBase
     {
         private CidadeService _service;
-
-        public CidadeController(IConfiguration configuration)
+        private readonly IMapper _mapper;
+        public CidadeController(IMapper mapper, IConfiguration configuration)
         {
             _service = new CidadeService(configuration);
+            _mapper = mapper;   
         }
 
         [HttpPost("Adicionar_Cidade")]
         public void AdicionmarCidade([FromQuery]CreateCidadeDTO c)
         {
-            Cidade cidade = new Cidade();
-            cidade.NomeCidade= c.NomeCidade;
-            cidade.NumHabitantes = c.NumHabitantes;
+            Cidade cidade = _mapper.Map<Cidade>(c);
             _service.Adicionar(cidade);
         }
 
