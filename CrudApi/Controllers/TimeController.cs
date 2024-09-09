@@ -1,4 +1,5 @@
-﻿using Crud;
+﻿using AutoMapper;
+using Crud;
 using Crud.Aplicação;
 using Crud.Entidades;
 using CrudApi._01_Entidades.DTO;
@@ -12,18 +13,18 @@ namespace CrudApi.Controllers
     public class TimeController : ControllerBase
     {
         private TimeService _service;
+        private readonly IMapper _mapper;  
 
-        public TimeController(IConfiguration configuration) //pegar connection string
+        public TimeController(IMapper mapper,IConfiguration configuration) //pegar connection string
         {
             _service = new TimeService(configuration);
+            _mapper = mapper;
         }
 
         [HttpPost ("Adicionar_Time")]
         public void AdicionmarTime([FromQuery] CreateTimeDTO t)
         {
-            Time time = new Time();
-            time.Nome = t.Nome;
-            time.AnoCriacao= t.AnoCriacao;
+            Time time = _mapper.Map<Time>(t);
             _service.Adicionar(time);
         }
 
