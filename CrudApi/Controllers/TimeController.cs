@@ -1,6 +1,7 @@
 ﻿using Crud;
 using Crud.Aplicação;
 using Crud.Entidades;
+using CrudApi._01_Entidades.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrudApi.Controllers
@@ -18,9 +19,12 @@ namespace CrudApi.Controllers
         }
 
         [HttpPost ("Adicionar_Time")]
-        public void AdicionmarTime([FromQuery] Time t)
+        public void AdicionmarTime([FromQuery] CreateTimeDTO t)
         {
-            _service.Adicionar(t);
+            Time time = new Time();
+            time.Nome = t.Nome;
+            time.AnoCriacao= t.AnoCriacao;
+            _service.Adicionar(time);
         }
 
 

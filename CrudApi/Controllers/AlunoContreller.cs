@@ -2,6 +2,7 @@
 using Crud.Entidades;
 using Crud;
 using Microsoft.AspNetCore.Mvc;
+using CrudApi._01_Entidades.DTO;
 
 namespace CrudApi.Controllers
 {
@@ -17,9 +18,13 @@ namespace CrudApi.Controllers
         }
 
         [HttpPost("Adicionar_Aluno")]
-        public void AdicionmarAluno(Aluno a)
+        public void AdicionmarAluno([FromQuery] CreateAlunoDTO a)
         {
-            _service.Adicionar(a);
+            Aluno aluno = new Aluno();
+            aluno.Nome = a.Nome;
+            aluno.Idade = a.Idade;
+            aluno.Peso = a.Peso;
+            _service.Adicionar(aluno);
         }
 
 

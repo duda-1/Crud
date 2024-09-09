@@ -2,6 +2,7 @@
 using Crud.Entidades;
 using Crud;
 using Microsoft.AspNetCore.Mvc;
+using CrudApi._01_Entidades.DTO;
 
 namespace CrudApi.Controllers
 {
@@ -17,9 +18,12 @@ namespace CrudApi.Controllers
         }
 
         [HttpPost("Adicionar_Cidade")]
-        public void AdicionmarCidade([FromQuery]Cidade c)
+        public void AdicionmarCidade([FromQuery]CreateCidadeDTO c)
         {
-            _service.Adicionar(c);
+            Cidade cidade = new Cidade();
+            cidade.NomeCidade= c.NomeCidade;
+            cidade.NumHabitantes = c.NumHabitantes;
+            _service.Adicionar(cidade);
         }
 
 
